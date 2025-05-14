@@ -52,10 +52,9 @@ const AddDeceased = () => {
       <input type="date" value={deathDate} onChange={e => setDeathDate(e.target.value)} required />
       <input value={deathPlace} onChange={e => setDeathPlace(e.target.value)} placeholder="Miejsce śmierci" />
       <textarea value={bio} onChange={e => setBio(e.target.value)} placeholder="Biografia" />
-      <MapPicker onLocationSelect={(loc) => setLocation(loc)} />
-      <p>
-        Wybrana lokalizacja: {location ? `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}` : 'Brak'}
-      </p>
+      <MapPicker location={location} setLocation={setLocation} />
+
+      
 
       <button type="submit">Zapisz</button>
     </form>
