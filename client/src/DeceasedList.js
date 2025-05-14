@@ -4,6 +4,7 @@ import { db } from './firebase';
 
 const DeceasedList = () => {
   const [people, setPeople] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,14 +16,34 @@ const DeceasedList = () => {
     fetchData();
   }, []);
 
+  const filteredPeople = people.filter(person =>
+    (
+      person.firstName +
+      person.lastName +
+      person.birthPlace +
+      person.deathPlace
+    )
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <h2>Lista zmarłych</h2>
-      {people.length === 0 ? (
-        <p>Brak danych</p>
+
+      <input
+        type="text"
+        placeholder="Szukaj po imieniu, nazwisku, miejscu..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ marginBottom: '15px', padding: '5px', width: '300px' }}
+      />
+
+      {filteredPeople.length === 0 ? (
+        <p>Brak wyników</p>
       ) : (
         <ul>
-          {people.map(person => (
+          {filteredPeople.map(person => (
             <li key={person.id}>
               <strong>{person.firstName} {person.lastName}</strong>  
               <br />
