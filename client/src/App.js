@@ -29,6 +29,9 @@ function App() {
             <span style={{ marginLeft: "20px" }}>
               Zalogowany jako: {user.displayName || user.email}
             </span>
+            <h1 className="text-4xl font-bold text-blue-600">
+              Tailwind działa!
+            </h1>
             <button
               onClick={() => auth.signOut()}
               style={{ marginLeft: "20px" }}
