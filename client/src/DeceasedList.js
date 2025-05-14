@@ -44,17 +44,15 @@ const DeceasedList = () => {
       ) : (
         <ul>
           {filteredPeople.map(person => (
-            <li key={person.id}>
-              <strong>{person.firstName} {person.lastName}</strong>  
-              <br />
-              Data ur.: {person.birthDate}, śm.: {person.deathDate}
-              <br />
-              {person.bio}
-              <br />
-              Miejsce ur.: {person.birthPlace}, śmierci: {person.deathPlace}
-              <br /><br />
-            </li>
-          ))}
+  <li key={person.id}>
+    <strong>{person.firstName} {person.lastName}</strong><br />
+    Data ur.: {person.birthDate}, śm.: {person.deathDate}<br />
+    {person.bio}<br />
+    Miejsce ur.: {person.birthPlace}, śmierci: {person.deathPlace}<br />
+    <a href={`/person/${person.id}`}>Zobacz szczegóły</a>
+    <br /><br />
+  </li>
+))}
         </ul>
       )}
     </div>
