@@ -5,6 +5,7 @@ import Home from "./Home";
 import DeceasedList from "./DeceasedList";
 import DeceasedMap from "./DeceasedMap";
 import PersonDetails from "./PersonDetails";
+import AllMap from "./AllMap";
 import { auth } from "./firebase";
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           path="/list"
           element={user ? <DeceasedList /> : <Home user={user} />}
         />
+        <Route path="/mapa" element={<AllMap />} />
       </Routes>
     </Router>
   );

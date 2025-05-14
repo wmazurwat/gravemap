@@ -13,7 +13,7 @@ const defaultCenter = {
 
 const MapPicker = ({ location, setLocation }) => {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCgRv6CdU4VNZxJc52L5y8TKCQ2Bh6g7Ys",
+    googleMapsApiKey: "AIzaSyCPZGNi4jss3jiCfEMdjfGOP9qynx5TgPY",
   });
 
   const mapRef = useRef(null);
