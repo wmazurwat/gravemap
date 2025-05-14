@@ -20,16 +20,19 @@ const defaultCenter = {
 };
 
 const AllMap = () => {
-  const { isLoaded } = useJsApiLoader({
+  const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyCPZGNi4jss3jiCfEMdjfGOP9qynx5TgPY",
   });
 
+  console.log("Loader:", isLoaded, loadError);
   const [deceasedList, setDeceasedList] = useState([]);
   const [selected, setSelected] = useState(null);
   const mapRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     const fetchDeceased = async () => {
       const snap = await getDocs(collection(db, "deceased"));
       const list = snap.docs
@@ -39,12 +42,13 @@ const AllMap = () => {
     };
 
     fetchDeceased();
-  }, []);
+  }, [isLoaded]);
 
   if (!isLoaded) return <p>Ładowanie mapy...</p>;
 
   return (
     <div>
+      console.log("AllMap component rendered");
       <h2>Mapa wszystkich zmarłych</h2>
       <GoogleMap
         mapContainerStyle={containerStyle}

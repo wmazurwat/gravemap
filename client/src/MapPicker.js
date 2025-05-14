@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -12,7 +12,7 @@ const defaultCenter = {
 };
 
 const MapPicker = ({ location, setLocation }) => {
-  const { isLoaded } = useJsApiLoader({
+  const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyCPZGNi4jss3jiCfEMdjfGOP9qynx5TgPY",
   });
 
@@ -29,15 +29,13 @@ const MapPicker = ({ location, setLocation }) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          setLocation({
+          const coords = {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude,
-          });
+          };
+          setLocation(coords);
           if (mapRef.current) {
-            mapRef.current.panTo({
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude,
-            });
+            mapRef.current.panTo(coords);
           }
         },
         () => {
@@ -49,6 +47,7 @@ const MapPicker = ({ location, setLocation }) => {
     }
   };
 
+  if (loadError) return <p>Błąd ładowania mapy: {loadError.message}</p>;
   if (!isLoaded) return <p>Ładowanie mapy...</p>;
 
   return (

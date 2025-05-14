@@ -7,9 +7,14 @@ import DeceasedMap from "./DeceasedMap";
 import PersonDetails from "./PersonDetails";
 import AllMap from "./AllMap";
 import { auth } from "./firebase";
+import { useJsApiLoader } from "@react-google-maps/api";
 
 function App() {
   const [user, setUser] = useState(null);
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyCPZGNi4jss3jiCfEMdjfGOP9qynx5TgPY",
+  });
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
@@ -17,6 +22,8 @@ function App() {
     });
     return () => unsubscribe();
   }, []);
+
+  if (!isLoaded) return <p>Ładowanie map Google...</p>;
 
   return (
     <Router>
@@ -29,9 +36,6 @@ function App() {
             <span style={{ marginLeft: "20px" }}>
               Zalogowany jako: {user.displayName || user.email}
             </span>
-            <h1 className="text-4xl font-bold text-blue-600">
-              Tailwind działa!
-            </h1>
             <button
               onClick={() => auth.signOut()}
               style={{ marginLeft: "20px" }}
@@ -48,7 +52,9 @@ function App() {
         <Route path="/" element={<Home user={user} />} />
         <Route
           path="/add"
-          element={user ? <AddDeceased /> : <Home user={user} />}
+          element={
+            user ? <AddDeceased isLoaded={isLoaded} /> : <Home user={user} />
+          }
         />
         <Route
           path="/map"
@@ -62,7 +68,7 @@ function App() {
           path="/list"
           element={user ? <DeceasedList /> : <Home user={user} />}
         />
-        <Route path="/mapa" element={<AllMap />} />
+        <Route path="/mapa" element={<AllMap isLoaded={isLoaded} />} />
       </Routes>
     </Router>
   );
