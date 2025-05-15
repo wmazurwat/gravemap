@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAsA37xKfsNWkQzOt60cIKWKM_YbNXX5BQ",
-  authDomain: "gravemap-7a32b.firebaseapp.com",
-  projectId: "gravemap-7a32b",
-  storageBucket: "gravemap-7a32b.firebasestorage.app",
-  messagingSenderId: "213927617389",
-  appId: "1:213927617389:web:fb030f2d528af588d1f064",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

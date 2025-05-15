@@ -21,7 +21,7 @@ const defaultCenter = {
 
 const AllMap = () => {
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCPZGNi4jss3jiCfEMdjfGOP9qynx5TgPY",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   console.log("Loader:", isLoaded, loadError);

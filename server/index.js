@@ -1,4 +1,5 @@
-// Wyłącz problematyczne zmienne środowiskowe (ochrona przed błędami parsera debuggera)
+require("dotenv").config();
+// // Wyłącz problematyczne zmienne środowiskowe (ochrona przed błędami parsera debuggera)
 delete process.env.DEBUG_URL;
 process.env.DEBUG = "";
 
